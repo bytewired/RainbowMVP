@@ -10,4 +10,6 @@ public abstract class BasePresenter<V> {
     public void unbindView() {
         mView = null;
     }
+
+    public void onDestroy() {};
 }
