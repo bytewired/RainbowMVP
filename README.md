@@ -1,6 +1,14 @@
 # RainbowMVP
 Lightweight MVP library(for personal using).
 
+For good understanding approach read this [article](https://medium.com/@czyrux/presenter-surviving-orientation-changes-with-loaders-6da6d86ffbbf).
+
+* Really lighweight library
+* Easy integrate to project
+* Minimum actions for implement MVP
+* Doesn't destroy presenter after rotation device
+* You can cached date in presenter for restore date after rotate device
+
 <h2>
     <a id="user-content-license" class="anchor" href="#license" aria-hidden="true">
     <span class="octicon octicon-link"></span></a>License
