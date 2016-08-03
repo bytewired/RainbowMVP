@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">RainbowMvpExample</string>
+    <string name="something_happened">Something happened</string>
 </resources>

@@ -1,7 +1,13 @@
 package com.ne1c.rainbowmvpexample.view;
 
-/**
- * Created by n.kucheriaviy on 03.08.16.
- */
+import android.support.annotation.StringRes;
+
+import com.ne1c.rainbowmvpexample.api.RepoModel;
+
+import java.util.ArrayList;
+
 public interface MainView {
+    void showRepos(ArrayList<RepoModel> repos);
+
+    void showError(@StringRes int resId);
 }
