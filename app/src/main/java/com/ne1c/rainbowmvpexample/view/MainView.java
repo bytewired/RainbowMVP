@@ -10,4 +10,6 @@ public interface MainView {
     void showRepos(ArrayList<RepoModel> repos);
 
     void showError(@StringRes int resId);
+
+    void showProgress();
 }

@@ -14,7 +14,7 @@ import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
-public class MainPresenter extends BasePresenter<MainView>{
+public class MainPresenter extends BasePresenter<MainView> {
     public static final String TAG = MainPresenter.class.getName();
 
     private ReposApi mApi;
@@ -29,7 +29,9 @@ public class MainPresenter extends BasePresenter<MainView>{
     }
 
     public void loadRepos() {
-       mSubscription = mApi.getTopAndroidRepos()
+        mView.showProgress();
+
+        mSubscription = mApi.getTopAndroidRepos()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(new Func1<ArrayList<RepoModel>, ArrayList<RepoModel>>() {
@@ -41,21 +43,20 @@ public class MainPresenter extends BasePresenter<MainView>{
                         return repoModels;
                     }
                 })
-                .filter(new Func1<ArrayList<RepoModel>, Boolean>() {
-                    @Override
-                    public Boolean call(ArrayList<RepoModel> repoModels) {
-                        return mView != null;
-                    }
-                })
                 .subscribe(new Action1<ArrayList<RepoModel>>() {
                     @Override
                     public void call(ArrayList<RepoModel> repoModels) {
-                        mView.showRepos(repoModels);
+                        mIsLoading = false;
+                        if (mView != null) {
+                            mView.showRepos(repoModels);
+                        }
                     }
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-                        mView.showError(R.string.something_happened);
+                        if (mView != null) {
+                            mView.showError(R.string.something_happened);
+                        }
                     }
                 });
     }
