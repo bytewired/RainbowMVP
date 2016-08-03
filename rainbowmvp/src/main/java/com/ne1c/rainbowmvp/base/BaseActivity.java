@@ -32,6 +32,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
 
     @Override
     public void onLoaderReset(Loader<P> loader) {
+        mPresenter.onDestroy();
         mPresenter = null;
     }
 

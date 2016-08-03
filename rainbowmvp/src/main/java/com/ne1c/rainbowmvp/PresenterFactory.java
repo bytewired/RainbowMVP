@@ -3,13 +3,13 @@ package com.ne1c.rainbowmvp;
 import com.ne1c.rainbowmvp.base.BasePresenter;
 
 public class PresenterFactory {
-    protected static PresenterFactory INSTANCE;
-
     /**
-     * In this method your can put all your dependencies
+     * Need to init
      */
-    public static void init() {
-        INSTANCE = new PresenterFactory();
+    protected static PresenterFactory mInstance;
+
+    public static PresenterFactory getInstance() {
+        return mInstance;
     }
 
     /**
@@ -18,7 +18,7 @@ public class PresenterFactory {
      * @param tag keyword of presenter
      * @return new instance of requeried presenter
      */
-    public static BasePresenter create(String tag) {
+    public BasePresenter create(String tag) {
         return null;
     }
 }

@@ -30,7 +30,7 @@ public class PresenterLoader<P extends BasePresenter> extends Loader<P> {
 
     @Override
     protected void onForceLoad() {
-        mPresenter = (P) PresenterFactory.create(mTagPresenter);
+        mPresenter = (P) PresenterFactory.getInstance().create(mTagPresenter);
         deliverResult(mPresenter);
     }
 
