@@ -23,7 +23,7 @@ public interface MyView {
 ```
 
 # Step 2
-Create presenter. You need inherit of BasePresenter and add tag
+Create presenter. You need inherit of BasePresenter and add tag:
 
 ```java
 public class MyPresenter extends BasePresenter<MyView> {
@@ -42,7 +42,7 @@ public class MyPresenter extends BasePresenter<MyView> {
 }
 ```
 # Step 3
-* Implement PresenterStorage
+* Implement PresenterStorage:
 ```java
 public class MyPresenterStorage implements PresenterStorage {
     public MyPresenterStorage(...) {
@@ -61,7 +61,7 @@ public class MyPresenterStorage implements PresenterStorage {
 ```
 
 # Step 4
-* Init PresneterFactory
+* Init PresenterFactory, before use any presenter. You can do it in onCreate() of Applicaton or splash screen:
 ```java
 public class MyApplication extends android.app.Application {
     @Override
