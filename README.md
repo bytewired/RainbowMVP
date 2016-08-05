@@ -14,17 +14,19 @@ For good understanding approach read this [article](https://medium.com/@czyrux/p
 # Step 1
 Create you View interface:
 
-<pre><code>public interface MyView {
+```java
+public interface MyView {
     void showResult(String text);
     
     void showError(@StringRes int resId);
 }
-</code></pre>
+```
 
 # Step 2
-Create presenter. You need inherit of BasePresenter and add tag
+Create presenter. You need inherit of BasePresenter and add tag:
 
-<pre><code>public class MyPresenter extends BasePresenter<MyView> {
+```java
+public class MyPresenter extends BasePresenter<MyView> {
     public static final TAG = MyPresenter.class.getName();
     ...
     public void makeParty() {
@@ -38,41 +40,51 @@ Create presenter. You need inherit of BasePresenter and add tag
     }
     ...
 }
-</code></pre>
-
+```
 # Step 3
-* Init PresneterFactory
-<pre><code>public class MyApplication extends android.app.Application {
+* Implement PresenterStorage:
+```java
+public class MyPresenterStorage implements PresenterStorage {
+    public MyPresenterStorage(...) {
+        ...
+    }
+
+    @Override
+    public BasePresenter create(String tag) {
+        if (tag.equals(MyPresenter.TAG)) {
+            return new MyPresenter(...);
+        }
+
+        return null;
+    }
+}
+```
+
+# Step 4
+* Init PresenterFactory, before use any presenter. You can do it in onCreate() of Applicaton or splash screen:
+```java
+public class MyApplication extends android.app.Application {
     @Override
     public void onCreate() {
         ...
-        MyPresenterFactory.init();
+        PresenterFactory.init(new MyPresenterStorage(...));
     }
 }
-</code></pre>
-
-* Add your presenter to PresenterFactory
-<pre><code>
-    public class MyPresenterFactory extends PresenterFactroy {
-        @Override
-        public BasePresenter create(String tag) {
-            if (tag.equals(MyPresenter.TAG)) {
-                return new MyPresenter(...);    
-            }
-            ...
-        }
-    }
-</code></pre>
+```
 
 # Step 4
 Your activity or fragment need to inherit of BaseActivity/BaseFragment and override getPresenterTag():
-<pre><code> public class MyActivity extends BaseActivity {
+```java
+public class MyActivity extends BaseActivity<MyPresenter> implement MyView {
+    ...
     @Override
     public String getPresenterTag() {
         return MyPresenter.TAG;
     }
+    ...
 }
-</code></pre>
+```
+
 <h2>
     <a id="user-content-license" class="anchor" href="#license" aria-hidden="true">
     <span class="octicon octicon-link"></span></a>License
