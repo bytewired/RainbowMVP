@@ -1,5 +1,5 @@
 # RainbowMVP
-Lightweight MVP library(for personal using).
+Lightweight MVP library(for personal using) with easy lifecycle.
 
 For good understanding approach read this [article](https://medium.com/@czyrux/presenter-surviving-orientation-changes-with-loaders-6da6d86ffbbf).
 
@@ -8,6 +8,11 @@ For good understanding approach read this [article](https://medium.com/@czyrux/p
 * Minimum actions for implement MVP
 * Doesn't destroy presenter after rotation device
 * You can cached date in presenter for restore date after rotate device
+
+In presenter you have 3 methods:
+- bindView(V view) - you need call this method for attach your view for presenter.
+- unbindView() - you need call this method when view not available.
+- onDestoy() - call, when you presenter will destroy.
 
 # Example how to integrate library in yout project:
 
