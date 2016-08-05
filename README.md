@@ -94,7 +94,7 @@ public class MyActivity extends BaseActivity<MyPresenter> implement MyView {
     <a id="user-content-license" class="anchor" href="#license" aria-hidden="true">
     <span class="octicon octicon-link"></span></a>License
 </h2>
-<pre><code>Copyright 2016 Mykola Kucheriaviy
+<pre><code>Copyright 2016 Nikolay Kucheriaviy
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
