@@ -77,7 +77,7 @@ public class MyApplication extends android.app.Application {
 }
 ```
 
-# Step 4
+# Step5
 Your activity or fragment need to inherit of BaseActivity/BaseFragment and override getPresenterTag():
 ```java
 public class MyActivity extends BaseActivity<MyPresenter> implement MyView {
