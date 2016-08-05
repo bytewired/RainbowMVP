@@ -12,4 +12,6 @@ public interface MainView {
     void showError(@StringRes int resId);
 
     void showProgress();
+
+    void hideProgress();
 }
