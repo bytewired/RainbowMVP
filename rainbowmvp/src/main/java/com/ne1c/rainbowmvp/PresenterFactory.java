@@ -3,10 +3,17 @@ package com.ne1c.rainbowmvp;
 import com.ne1c.rainbowmvp.base.BasePresenter;
 
 public class PresenterFactory {
-    /**
-     * Need to init
-     */
-    protected static PresenterFactory mInstance;
+    private static PresenterFactory mInstance;
+
+    private PresenterStorage mPresenterStorage;
+
+    private PresenterFactory(PresenterStorage storage) {
+        mPresenterStorage = storage;
+    }
+
+    public static void init(PresenterStorage storage) {
+        mInstance = new PresenterFactory(storage);
+    }
 
     public static PresenterFactory getInstance() {
         return mInstance;
@@ -19,6 +26,6 @@ public class PresenterFactory {
      * @return new instance of requeried presenter
      */
     public BasePresenter create(String tag) {
-        return null;
+        return mPresenterStorage.create(tag);
     }
 }
