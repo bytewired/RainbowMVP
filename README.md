@@ -5,16 +5,16 @@ For good understanding approach read this [article](https://medium.com/@czyrux/p
 
 * Really lighweight library
 * Easy integrate to project
-* Minimum actions for implement MVP
+* Minimum actions to implement MVP
 * Doesn't destroy presenter after rotation device
-* You can cached date in presenter for restore date after rotate device
+* You can cached data in presenter for restore data after rotate device
 
 In presenter you have 3 methods:
-- bindView(V view) - you need call this method for attach your view for presenter.
-- unbindView() - you need call this method when view not available.
-- onDestoy() - call, when you presenter will destroy.
+- bindView(V view) - you need call this method for attach your view to presenter.
+- unbindView() - you need call this method when view not available already.
+- onDestoy() - call, when your presenter will destroy.
 
-# Example how to integrate library in yout project:
+# Example how to integrate library in your project:
 
 # Step 1
 Create you View interface:
