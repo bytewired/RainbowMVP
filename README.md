@@ -14,6 +14,31 @@ In presenter you have 3 methods:
 - unbindView() - you need call this method when view not available already.
 - onDestoy() - call, when your presenter will destroy.
 
+Important thing:
+You can bind your view to presenter <b>ONLY</b> after <b>onStart()</b>
+
+[![Release](https://jitpack.io/v/ne1c/rainbowmvp.svg)](https://jitpack.io/#ne1c/rainbowmvp)
+
+#Dependency
+
+Step 1. Add it in your root build.gradle at the end of repositories:
+```groovy
+allprojects {
+	repositories {
+		...
+		maven { url "https://jitpack.io" }
+	}
+}
+```
+
+Step 2. Add the dependency
+```groovy
+dependencies {
+	   compile 'com.github.ne1c:rainbowmvp:1.0.0'
+	}
+}
+```
+
 # Example how to integrate library in your project:
 
 # Step 1
@@ -82,6 +107,20 @@ Your activity or fragment need to inherit of BaseActivity/BaseFragment and overr
 ```java
 public class MyActivity extends BaseActivity<MyPresenter> implement MyView {
     ...
+    @Ovveride
+    public void onStart() {
+        super.onStart();
+        
+        mPresenter.bindView(this);
+    }
+    
+    @Ovveride
+    public void onStop() {
+        super.onStop();
+        
+        mPresenter.unbindView();
+    }
+    
     @Override
     public String getPresenterTag() {
         return MyPresenter.TAG;
