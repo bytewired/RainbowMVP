@@ -17,7 +17,7 @@ In presenter you have 3 methods:
 Important thing:
 You can bind your view to presenter <b>ONLY</b> after <b>onStart()</b>
 
-[![Release](https://jitpack.io/v/ne1c/rainbowmvp.svg)](https://jitpack.io/#ne1c/rainbowmvp)
+[![](https://jitpack.io/v/ne1c/rainbowmvp.svg)](https://jitpack.io/#ne1c/rainbowmvp)
 
 #Dependency
 
@@ -34,7 +34,7 @@ allprojects {
 Step 2. Add the dependency
 ```groovy
 dependencies {
-	   compile 'com.github.ne1c:rainbowmvp:1.0.0'
+	   compile 'com.github.ne1c:rainbowmvp:1.0'
 	}
 }
 ```
