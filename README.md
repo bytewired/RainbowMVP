@@ -17,6 +17,28 @@ In presenter you have 3 methods:
 Important thing:
 You can bind your view to presenter <b>ONLY</b> after <b>onStart()</b>
 
+[![Release](https://jitpack.io/v/ne1c/rainbowmvp.svg)](https://jitpack.io/#ne1c/rainbowmvp)
+
+#Dependency
+
+Step 1. Add it in your root build.gradle at the end of repositories:
+```groovy
+allprojects {
+	repositories {
+		...
+		maven { url "https://jitpack.io" }
+	}
+}
+```
+
+Step 2. Add the dependency
+```groovy
+dependencies {
+	   compile 'com.github.ne1c:rainbowmvp:1.0.0'
+	}
+}
+```
+
 # Example how to integrate library in your project:
 
 # Step 1
@@ -104,26 +126,6 @@ public class MyActivity extends BaseActivity<MyPresenter> implement MyView {
         return MyPresenter.TAG;
     }
     ...
-}
-```
-
-#Dependency
-
-Step 1. Add it in your root build.gradle at the end of repositories:
-```groovy
-allprojects {
-	repositories {
-		...
-		maven { url "https://jitpack.io" }
-	}
-}
-```
-
-Step 2. Add the dependency
-```groovy
-dependencies {
-	   compile 'com.github.ne1c:rainbowmvp:1.0.0'
-	}
 }
 ```
 
