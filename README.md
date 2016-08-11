@@ -15,7 +15,7 @@ In presenter you have 3 methods:
 - onDestoy() - call, when your presenter will destroy.
 
 Important thing:
-You can bind your view to presenter <b>ONLY</b> after <b>onStart()</b>
+You can bind your view to presenter <b>ONLY</b> after <b>onStart()</b> in Activity, and after onResume() in Fragment.
 
 [![](https://jitpack.io/v/ne1c/rainbowmvp.svg)](https://jitpack.io/#ne1c/rainbowmvp)
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-RainbowMVP-green.svg?style=true)](https://android-arsenal.com/details/1/4112)
