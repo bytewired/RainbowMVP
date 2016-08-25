@@ -16,6 +16,16 @@
 
 package com.ne1c.rainbowmvp;
 
+/**
+ * A enum that contains possible states for view
+ *
+ * START - use for start any operations that need to show for user
+ * IN_PROGRESS - use for show progress of any operation
+ * FINISH - use in end of work any operation
+ * SUCCESS - use for show result of any operation
+ * ERROR - use for show error of any operation
+ * EMPTY - use for default state if not necessary show any information
+ */
 public enum ViewState {
     START, IN_PROGRESS, FINISH, SUCCESS, ERROR, EMPTY
 }

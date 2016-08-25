@@ -16,6 +16,13 @@
 
 package com.ne1c.rainbowmvp;
 
+/**
+ * An interface that contains the callback for change ViewState instance
+ */
 public interface ViewStateListener {
+    /**
+     * Callback that call after change state
+     * @param state new state
+     */
     void stateChanged(ViewState state);
 }

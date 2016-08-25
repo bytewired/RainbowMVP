@@ -18,6 +18,14 @@ package com.ne1c.rainbowmvp;
 
 import com.ne1c.rainbowmvp.base.BasePresenter;
 
+/**
+ * A interface that contain method create(...) for new instance of presenter
+ */
 public interface PresenterStorage {
+    /**
+     * Method that need implement for create presenter that extend of BasePresenter
+     * @param tag keyword for presenter that will create
+     * @return instance of presenter
+     */
     BasePresenter create(String tag);
 }
