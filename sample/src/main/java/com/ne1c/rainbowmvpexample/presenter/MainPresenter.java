@@ -1,5 +1,7 @@
 package com.ne1c.rainbowmvpexample.presenter;
 
+import com.ne1c.rainbowmvp.ViewState;
+import com.ne1c.rainbowmvp.ViewStateListener;
 import com.ne1c.rainbowmvp.base.BasePresenter;
 import com.ne1c.rainbowmvpexample.R;
 import com.ne1c.rainbowmvpexample.api.RepoModel;
@@ -15,38 +17,26 @@ import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
-public class MainPresenter extends BasePresenter<MainView> {
+public class MainPresenter extends BasePresenter<MainView> implements ViewStateListener {
     public static final String TAG = MainPresenter.class.getName();
 
     private ReposApi mApi;
 
     private ArrayList<RepoModel> mCachedRepos = new ArrayList<>();
-    private boolean mIsLoading = false;
 
     private Subscription mSubscription;
 
     public MainPresenter(ReposApi api) {
         mApi = api;
-    }
-
-    @Override
-    public void bindView(MainView view) {
-        super.bindView(view);
-
-        if (mIsLoading) {
-            mView.showProgress();
-        } else {
-            mView.showRepos(mCachedRepos);
-        }
+        addViewStateListener(this);
     }
 
     public void loadRepos() {
-        if (mIsLoading) {
+        if (getViewState() == ViewState.IN_PROGRESS || mCachedRepos.size() > 0) {
             return;
         }
 
-        mIsLoading = true;
-        mView.showProgress();
+        setViewState(ViewState.IN_PROGRESS);
 
         mSubscription = mApi.getTopAndroidRepos()
                 .subscribeOn(Schedulers.io())
@@ -63,7 +53,7 @@ public class MainPresenter extends BasePresenter<MainView> {
                 .subscribe(new Action1<ArrayList<RepoModel>>() {
                     @Override
                     public void call(ArrayList<RepoModel> repoModels) {
-                        mIsLoading = false;
+                        setViewState(ViewState.FINISH, false);
                         if (mView != null) {
                             mView.showRepos(repoModels);
                             mView.hideProgress();
@@ -72,7 +62,7 @@ public class MainPresenter extends BasePresenter<MainView> {
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-                        mIsLoading = false;
+                        setViewState(ViewState.ERROR, false);
                         if (mView != null) {
                             mView.showError(R.string.something_happened);
                             mView.hideProgress();
@@ -84,5 +74,16 @@ public class MainPresenter extends BasePresenter<MainView> {
     @Override
     public void onDestroy() {
         mSubscription.unsubscribe();
+    }
+
+    @Override
+    public void stateChanged(ViewState state) {
+        if (state == ViewState.IN_PROGRESS) {
+            mView.showProgress();
+        }
+
+        if (state == ViewState.FINISH) {
+            mView.showRepos(mCachedRepos);
+        }
     }
 }
