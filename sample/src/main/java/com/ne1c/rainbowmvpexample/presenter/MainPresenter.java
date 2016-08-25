@@ -54,18 +54,23 @@ public class MainPresenter extends BasePresenter<MainView> implements ViewStateL
                     @Override
                     public void call(ArrayList<RepoModel> repoModels) {
                         setViewState(ViewState.FINISH, false);
+
                         if (mView != null) {
                             mView.showRepos(repoModels);
                             mView.hideProgress();
+                            setViewState(ViewState.EMPTY);
                         }
                     }
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
                         setViewState(ViewState.ERROR, false);
+
                         if (mView != null) {
                             mView.showError(R.string.something_happened);
                             mView.hideProgress();
+
+                            setViewState(ViewState.EMPTY);
                         }
                     }
                 });
@@ -73,6 +78,8 @@ public class MainPresenter extends BasePresenter<MainView> implements ViewStateL
 
     @Override
     public void onDestroy() {
+        super.onDestroy();
+
         mSubscription.unsubscribe();
     }
 
@@ -84,6 +91,7 @@ public class MainPresenter extends BasePresenter<MainView> implements ViewStateL
 
         if (state == ViewState.FINISH) {
             mView.showRepos(mCachedRepos);
+            mView.hideProgress();
         }
     }
 }
