@@ -35,12 +35,12 @@ allprojects {
 Step 2. Add the dependency
 ```groovy
 dependencies {
-	   compile 'com.github.ne1c:rainbowmvp:1.0'
+	   compile 'com.github.ne1c:rainbowmvp:1.1'
 	}
 }
 ```
 
-# Example how to integrate library in your project:
+<h1>Example how to integrate library in your project:</h1>
 
 # Step 1
 Create you View interface:
@@ -125,6 +125,64 @@ public class MyActivity extends BaseActivity<MyPresenter> implements MyView {
     @Override
     public String getPresenterTag() {
         return MyPresenter.TAG;
+    }
+    ...
+}
+```
+
+# Additional features
+
+# ViewState
+You can use [ViewState](https://github.com/Ne1c/RainbowMVP/blob/master/rainbowmvp/src/main/java/com/ne1c/rainbowmvp/ViewState.java) for saving state of view, and than restore after <b>bindView(...)</b>. For it action you need implement [ViewStateListener](https://github.com/Ne1c/RainbowMVP/blob/master/rainbowmvp/src/main/java/com/ne1c/rainbowmvp/ViewStateListener.java) in your presenter or another place. Method stateChanged(...) will call after every change of ViewState or after call method super.bindView(...). Example how it works:
+```java
+public class MyPresenter extends BasePresenter<MyView> implements ViewStateListener {
+    public MyPresenter(...) {
+    	...
+    	addViewStateListener(this);
+    }
+    ...
+    public void makeParty() {
+        setViewState(ViewState.IN_PROGRESS);
+        
+        getApi().loadData(response -> {
+                if (response.isSuccess()) {
+                    // If second parameter will be false, than callback not be called
+                    // it need using that in stateChanged(...) you call methods of your view
+                    // another you catch NullPointerException
+                    setViewState(ViewState.SUCCESS, false);
+                    if (mView != null) {
+                        mView.showResult(response.getData());
+                        
+                        // Restore state to default
+                        setViewState(ViewState.EMPTY);
+                    }
+                } else if (response.isError()) {
+                    setViewState(ViewState.ERROR, false);
+                    
+                    if (mView != null) {
+                        mView.showErrorLoadData();
+                        
+                        // Restore state to default
+                        setViewState(ViewState.EMPTY);
+                    }
+                }
+            });
+    }
+    
+    @Override
+    public void stateChanged(ViewState state) {
+        if (state == ViewState.IN_PROGRESS) {
+            mView.showProgress();
+        }
+
+        if (state == ViewState.SUCCESS) {
+            mView.showRepos(mCachedData);
+            mView.hideProgress();
+        }
+        
+        if (state == ViewState.ERROR) {
+            mView.showErrorLoadData()
+        }
     }
     ...
 }
