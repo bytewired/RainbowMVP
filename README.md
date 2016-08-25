@@ -133,7 +133,7 @@ public class MyActivity extends BaseActivity<MyPresenter> implements MyView {
 # Additional features
 
 # ViewState
-You can use [ViewState](https://github.com/Ne1c/RainbowMVP/blob/master/rainbowmvp/src/main/java/com/ne1c/rainbowmvp/ViewState.java) for saving state of view, and than restore after <b>bindView(...)</b>. For it action you need implement [ViewStateListener](https://github.com/Ne1c/RainbowMVP/blob/master/rainbowmvp/src/main/java/com/ne1c/rainbowmvp/ViewStateListener.java) in your presenter or another place. Method stateChanged(...) will call after every change of ViewState or after call method super.bindView(...). Example how it works:
+You can use [ViewState](https://github.com/Ne1c/RainbowMVP/blob/master/rainbowmvp/src/main/java/com/ne1c/rainbowmvp/ViewState.java) for saving state of view, and than restore after <b>bindView(...)</b>. For it action you need implement [ViewStateListener](https://github.com/Ne1c/RainbowMVP/blob/master/rainbowmvp/src/main/java/com/ne1c/rainbowmvp/ViewStateListener.java) in your presenter or another place. Method stateChanged(...) will call after every change of ViewState or after call method <b>bindView(...)</b>. Example how it works:
 ```java
 public class MyPresenter extends BasePresenter<MyView> implements ViewStateListener {
     public MyPresenter(...) {
