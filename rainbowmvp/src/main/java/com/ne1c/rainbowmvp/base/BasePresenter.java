@@ -25,7 +25,7 @@ public abstract class BasePresenter<V> {
         removeViewStateListener();
     }
 
-    public void setState(ViewState state) {
+    public void setViewState(ViewState state) {
         mLastState = state;
 
         if (mViewStateListener != null) {
@@ -33,7 +33,7 @@ public abstract class BasePresenter<V> {
         }
     }
 
-    public void setState(ViewState state, boolean callListener) {
+    public void setViewState(ViewState state, boolean callListener) {
         mLastState = state;
 
         if (callListener && mViewStateListener != null) {
@@ -41,7 +41,7 @@ public abstract class BasePresenter<V> {
         }
     }
 
-    public ViewState getState() {
+    public ViewState getViewState() {
         return mLastState;
     }
 
