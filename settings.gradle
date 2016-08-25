@@ -1,1 +1,1 @@
-include ':app', ':rainbowmvp'
+include ':sample', ':rainbowmvp'

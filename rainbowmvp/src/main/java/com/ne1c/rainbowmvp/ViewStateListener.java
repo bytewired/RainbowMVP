@@ -16,16 +16,13 @@
 
 package com.ne1c.rainbowmvp;
 
-import com.ne1c.rainbowmvp.base.BasePresenter;
-
 /**
- * A interface that contain method create(...) for new instance of presenter
+ * An interface that contains the callback for change ViewState instance
  */
-public interface PresenterStorage {
+public interface ViewStateListener {
     /**
-     * Method that need implement for create presenter that extend of BasePresenter
-     * @param tag keyword for presenter that will create
-     * @return instance of presenter
+     * Callback that call after change state
+     * @param state new state
      */
-    BasePresenter create(String tag);
+    void stateChanged(ViewState state);
 }

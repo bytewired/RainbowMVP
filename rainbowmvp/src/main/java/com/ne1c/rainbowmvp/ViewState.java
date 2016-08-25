@@ -16,16 +16,16 @@
 
 package com.ne1c.rainbowmvp;
 
-import com.ne1c.rainbowmvp.base.BasePresenter;
-
 /**
- * A interface that contain method create(...) for new instance of presenter
+ * A enum that contains possible states for view
+ *
+ * START - use for start any operations that need to show for user
+ * IN_PROGRESS - use for show progress of any operation
+ * FINISH - use in end of work any operation
+ * SUCCESS - use for show result of any operation
+ * ERROR - use for show error of any operation
+ * EMPTY - use for default state if not necessary show any information
  */
-public interface PresenterStorage {
-    /**
-     * Method that need implement for create presenter that extend of BasePresenter
-     * @param tag keyword for presenter that will create
-     * @return instance of presenter
-     */
-    BasePresenter create(String tag);
+public enum ViewState {
+    START, IN_PROGRESS, FINISH, SUCCESS, ERROR, EMPTY
 }
