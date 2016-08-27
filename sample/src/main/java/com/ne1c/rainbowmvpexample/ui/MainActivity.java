@@ -37,15 +37,15 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
     protected void onStart() {
         super.onStart();
 
-        mPresenter.bindView(this);
-        mPresenter.loadRepos();
+        getPresenter().bindView(this);
+        getPresenter().loadRepos();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
 
-        mPresenter.unbindView();
+        getPresenter().unbindView();
     }
 
     @Override

@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
@@ -32,15 +33,22 @@ public class MainPresenter extends BasePresenter<MainView> implements ViewStateL
     }
 
     public void loadRepos() {
-        if (getViewState() == ViewState.IN_PROGRESS || mCachedRepos.size() > 0) {
+        if (getViewState() == ViewState.IN_PROGRESS) {
             return;
         }
 
-        setViewState(ViewState.IN_PROGRESS);
+        if (mCachedRepos.size() > 0) {
+            getView().showRepos(mCachedRepos);
+            return;
+        }
 
         mSubscription = mApi.getTopAndroidRepos()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Action0() {
+                    @Override
+                    public void call() {
+                        setViewState(ViewState.IN_PROGRESS);
+                    }
+                })
                 .map(new Func1<RepoResponse, ArrayList<RepoModel>>() {
                     @Override
                     public ArrayList<RepoModel> call(RepoResponse response) {
@@ -50,14 +58,16 @@ public class MainPresenter extends BasePresenter<MainView> implements ViewStateL
                         return response.repos;
                     }
                 })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<ArrayList<RepoModel>>() {
                     @Override
                     public void call(ArrayList<RepoModel> repoModels) {
                         setViewState(ViewState.FINISH, false);
 
-                        if (mView != null) {
-                            mView.showRepos(repoModels);
-                            mView.hideProgress();
+                        if (getView() != null) {
+                            getView().showRepos(repoModels);
+                            getView().hideProgress();
                             setViewState(ViewState.EMPTY);
                         }
                     }
@@ -66,9 +76,9 @@ public class MainPresenter extends BasePresenter<MainView> implements ViewStateL
                     public void call(Throwable throwable) {
                         setViewState(ViewState.ERROR, false);
 
-                        if (mView != null) {
-                            mView.showError(R.string.something_happened);
-                            mView.hideProgress();
+                        if (getView() != null) {
+                            getView().showError(R.string.something_happened);
+                            getView().hideProgress();
 
                             setViewState(ViewState.EMPTY);
                         }
@@ -86,12 +96,17 @@ public class MainPresenter extends BasePresenter<MainView> implements ViewStateL
     @Override
     public void stateChanged(ViewState state) {
         if (state == ViewState.IN_PROGRESS) {
-            mView.showProgress();
+            getView().showProgress();
         }
 
         if (state == ViewState.FINISH) {
-            mView.showRepos(mCachedRepos);
-            mView.hideProgress();
+            getView().showRepos(mCachedRepos);
+            getView().hideProgress();
+        }
+
+        if (state == ViewState.ERROR) {
+            getView().hideProgress();
+            getView().showError(R.string.something_happened);
         }
     }
 }
