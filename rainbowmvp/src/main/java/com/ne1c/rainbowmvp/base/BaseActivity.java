@@ -27,7 +27,7 @@ import com.ne1c.rainbowmvp.PresenterLoader;
 public abstract class BaseActivity<P extends BasePresenter> extends AppCompatActivity implements LoaderManager.LoaderCallbacks<P> {
     protected final int LOADER_ID = 342;
 
-    protected P mPresenter;
+    private P mPresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,6 +50,10 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
     public void onLoaderReset(Loader<P> loader) {
         mPresenter.onDestroy();
         mPresenter = null;
+    }
+
+    protected P getPresenter() {
+        return mPresenter;
     }
 
     protected abstract String getPresenterTag();

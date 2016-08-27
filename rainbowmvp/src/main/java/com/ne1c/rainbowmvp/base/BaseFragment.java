@@ -27,7 +27,7 @@ import com.ne1c.rainbowmvp.PresenterLoader;
 public abstract class BaseFragment<P extends BasePresenter> extends Fragment implements LoaderManager.LoaderCallbacks<P> {
     protected final int LOADER_ID = 593;
 
-    protected P mPresenter;
+    private P mPresenter;
 
     private boolean mPresenterDelivered;
 
@@ -54,6 +54,10 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
     @Override
     public void onLoaderReset(Loader<P> loader) {
         mPresenter = null;
+    }
+
+    protected P getPresenter() {
+        return mPresenter;
     }
 
     protected abstract String getPresenterTag();

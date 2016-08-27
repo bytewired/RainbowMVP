@@ -20,7 +20,7 @@ import com.ne1c.rainbowmvp.ViewState;
 import com.ne1c.rainbowmvp.ViewStateListener;
 
 public abstract class BasePresenter<V> {
-    protected V mView;
+    private V mView;
 
     private ViewState mLastState = ViewState.EMPTY;
     private ViewStateListener mViewStateListener;
@@ -39,6 +39,10 @@ public abstract class BasePresenter<V> {
 
     public void onDestroy() {
         removeViewStateListener();
+    }
+
+    public V getView() {
+        return mView;
     }
 
     public void setViewState(ViewState state) {
