@@ -64,9 +64,9 @@ public class MyPresenter extends BasePresenter<MyView> {
         // some actions
         boolean success = ...
         if (success) {
-            mView.showResult(...);
+            getView().showResult(...);
         } else {
-            mView.showError(R.string.error);
+            getView().showError(R.string.error);
         }
     }
     ...
@@ -112,14 +112,14 @@ public class MyActivity extends BaseActivity<MyPresenter> implements MyView {
     public void onStart() {
         super.onStart();
         
-        mPresenter.bindView(this);
+        getPresenter().bindView(this);
     }
     
     @Ovveride
     public void onStop() {
         super.onStop();
         
-        mPresenter.unbindView();
+        getPresenter().unbindView();
     }
     
     @Override
@@ -150,8 +150,8 @@ public class MyPresenter extends BasePresenter<MyView> implements ViewStateListe
                     // it need using that in stateChanged(...) you call methods of your view
                     // another you catch NullPointerException
                     setViewState(ViewState.SUCCESS, false);
-                    if (mView != null) {
-                        mView.showResult(response.getData());
+                    if (getView() != null) {
+                        getView().showResult(response.getData());
                         
                         // Restore state to default
                         setViewState(ViewState.EMPTY);
@@ -159,8 +159,8 @@ public class MyPresenter extends BasePresenter<MyView> implements ViewStateListe
                 } else if (response.isError()) {
                     setViewState(ViewState.ERROR, false);
                     
-                    if (mView != null) {
-                        mView.showErrorLoadData();
+                    if (getView() != null) {
+                        getView().showErrorLoadData();
                         
                         // Restore state to default
                         setViewState(ViewState.EMPTY);
@@ -172,16 +172,16 @@ public class MyPresenter extends BasePresenter<MyView> implements ViewStateListe
     @Override
     public void stateChanged(ViewState state) {
         if (state == ViewState.IN_PROGRESS) {
-            mView.showProgress();
+            getView().showProgress();
         }
 
         if (state == ViewState.SUCCESS) {
-            mView.showRepos(mCachedData);
-            mView.hideProgress();
+            getView().showRepos(mCachedData);
+            getView().hideProgress();
         }
         
         if (state == ViewState.ERROR) {
-            mView.showErrorLoadData()
+            getView().showErrorLoadData()
         }
     }
     ...
