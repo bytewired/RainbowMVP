@@ -16,16 +16,19 @@
 
 package com.ne1c.rainbowmvp.base;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 import com.ne1c.rainbowmvp.ViewState;
 import com.ne1c.rainbowmvp.ViewStateListener;
 
 public abstract class BasePresenter<V> {
     private V mView;
 
-    private ViewState mLastState = ViewState.EMPTY;
+    private ViewState mLastState = ViewState.NOTHING;
     private ViewStateListener mViewStateListener;
 
-    public void bindView(V view) {
+    public void bindView(@NonNull V view) {
         mView = view;
 
         if (mViewStateListener != null) {
@@ -41,6 +44,7 @@ public abstract class BasePresenter<V> {
         removeViewStateListener();
     }
 
+    @Nullable
     public V getView() {
         return mView;
     }
@@ -48,15 +52,7 @@ public abstract class BasePresenter<V> {
     public void setViewState(ViewState state) {
         mLastState = state;
 
-        if (mViewStateListener != null) {
-            mViewStateListener.stateChanged(state);
-        }
-    }
-
-    public void setViewState(ViewState state, boolean callListener) {
-        mLastState = state;
-
-        if (callListener && mViewStateListener != null) {
+        if (mViewStateListener != null && mView != null) {
             mViewStateListener.stateChanged(state);
         }
     }

@@ -68,7 +68,7 @@ public class MainPresenter extends BasePresenter<MainView> implements ViewStateL
                         if (getView() != null) {
                             getView().showRepos(repoModels);
                             getView().hideProgress();
-                            setViewState(ViewState.EMPTY);
+                            setViewState(ViewState.NOTHING);
                         }
                     }
                 }, new Action1<Throwable>() {
@@ -80,7 +80,7 @@ public class MainPresenter extends BasePresenter<MainView> implements ViewStateL
                             getView().showError(R.string.something_happened);
                             getView().hideProgress();
 
-                            setViewState(ViewState.EMPTY);
+                            setViewState(ViewState.NOTHING);
                         }
                     }
                 });
