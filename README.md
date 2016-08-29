@@ -146,24 +146,16 @@ public class MyPresenter extends BasePresenter<MyView> implements ViewStateListe
         
         getApi().loadData(response -> {
                 if (response.isSuccess()) {
-                    // If second parameter will be false, than callback not be called
-                    // it need using that in stateChanged(...) you call methods of your view
-                    // another you catch NullPointerException
-                    setViewState(ViewState.SUCCESS, false);
+                    setViewState(ViewState.SUCCESS);
+                    
                     if (getView() != null) {
                         getView().showResult(response.getData());
-                        
-                        // Restore state to default
-                        setViewState(ViewState.EMPTY);
                     }
                 } else if (response.isError()) {
-                    setViewState(ViewState.ERROR, false);
+                    setViewState(ViewState.ERROR);
                     
                     if (getView() != null) {
                         getView().showErrorLoadData();
-                        
-                        // Restore state to default
-                        setViewState(ViewState.EMPTY);
                     }
                 }
             });
@@ -183,6 +175,8 @@ public class MyPresenter extends BasePresenter<MyView> implements ViewStateListe
         if (state == ViewState.ERROR) {
             getView().showErrorLoadData()
         }
+        
+        setViewState(ViewState.NOTHING);
     }
     ...
 }
