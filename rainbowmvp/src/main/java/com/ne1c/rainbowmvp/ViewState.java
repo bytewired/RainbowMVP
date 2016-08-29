@@ -24,8 +24,8 @@ package com.ne1c.rainbowmvp;
  * FINISH - use in end of work any operation
  * SUCCESS - use for show result of any operation
  * ERROR - use for show error of any operation
- * EMPTY - use for default state if not necessary show any information
+ * NOTHING - use for default state if not necessary show any information
  */
 public enum ViewState {
-    START, IN_PROGRESS, FINISH, SUCCESS, ERROR, EMPTY
+    START, IN_PROGRESS, FINISH, SUCCESS, ERROR, NOTHING
 }
