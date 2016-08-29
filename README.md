@@ -35,7 +35,7 @@ allprojects {
 Step 2. Add the dependency
 ```groovy
 dependencies {
-	   compile 'com.github.ne1c:rainbowmvp:1.2'
+	   compile 'com.github.ne1c:rainbowmvp:1.2.1'
 	}
 }
 ```
