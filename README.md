@@ -40,8 +40,6 @@ dependencies {
 }
 ```
 
-<h1>Example how to integrate library in your project:</h1>
-
 # Step 1
 Create you View interface:
 
