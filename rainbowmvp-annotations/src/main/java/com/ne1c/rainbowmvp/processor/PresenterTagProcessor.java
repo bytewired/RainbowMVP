@@ -1,28 +1,31 @@
 package com.ne1c.rainbowmvp.processor;
 
-import com.google.auto.service.AutoService;
-import com.ne1c.rainbowmvp.annotaions.StorableView;
+import com.ne1c.rainbowmvp.annotaions.PresenterTag;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.annotation.processing.AbstractProcessor;
-import javax.annotation.processing.Processor;
+import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.TypeElement;
 
-@AutoService(Processor.class)
-public class StorableProcessor extends AbstractProcessor {
-    public StorableProcessor() {
+public class PresenterTagProcessor extends AbstractProcessor {
+    public PresenterTagProcessor() {
+    }
+
+    @Override
+    public synchronized void init(ProcessingEnvironment processingEnvironment) {
+        super.init(processingEnvironment);
     }
 
     @Override
     public boolean process(Set<? extends TypeElement> set, RoundEnvironment env) {
-        for (Element e : env.getElementsAnnotatedWith(StorableView.class)) {
-            if (e.getKind() == ElementKind.INTERFACE) {
+        for (Element e : env.getElementsAnnotatedWith(PresenterTag.class)) {
+            if (e.getKind() == ElementKind.CLASS) {
             }
         }
         return false;
@@ -31,7 +34,7 @@ public class StorableProcessor extends AbstractProcessor {
     @Override
     public Set<String> getSupportedAnnotationTypes() {
         Set<String> annotations = new LinkedHashSet<>();
-        annotations.add(StorableView.class.getCanonicalName());
+        annotations.add(PresenterTag.class.getCanonicalName());
         return annotations;
     }
 

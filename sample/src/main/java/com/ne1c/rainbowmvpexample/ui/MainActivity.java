@@ -7,6 +7,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.ne1c.rainbowmvp.annotaions.PresenterTag;
 import com.ne1c.rainbowmvp.base.BaseActivity;
 import com.ne1c.rainbowmvpexample.R;
 import com.ne1c.rainbowmvpexample.api.RepoModel;
@@ -15,6 +16,7 @@ import com.ne1c.rainbowmvpexample.view.MainView;
 
 import java.util.ArrayList;
 
+@PresenterTag(MainPresenter.TAG)
 public class MainActivity extends BaseActivity<MainPresenter> implements MainView {
     private ListView mReposListView;
     private ProgressBar mProgressBar;

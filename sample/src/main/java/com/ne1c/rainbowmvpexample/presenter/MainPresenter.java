@@ -19,7 +19,7 @@ import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 public class MainPresenter extends BasePresenter<MainView> implements ViewStateListener {
-    public static final String TAG = MainPresenter.class.getName();
+    public static final String TAG = "main_presenter";
 
     private ReposApi mApi;
 
