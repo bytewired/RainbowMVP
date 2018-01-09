@@ -12,6 +12,7 @@ import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.TypeElement;
+import javax.tools.Diagnostic;
 
 public class PresenterTagProcessor extends AbstractProcessor {
     public PresenterTagProcessor() {
@@ -25,8 +26,11 @@ public class PresenterTagProcessor extends AbstractProcessor {
     @Override
     public boolean process(Set<? extends TypeElement> set, RoundEnvironment env) {
         for (Element e : env.getElementsAnnotatedWith(PresenterTag.class)) {
-            if (e.getKind() == ElementKind.CLASS) {
+            if (e.getKind() != ElementKind.CLASS) {
+                processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR, "Can be applied only to class.");
+                return true;
             }
+
         }
         return false;
     }
