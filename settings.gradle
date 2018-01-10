@@ -1,1 +1,1 @@
-include ':app', ':rainbowmvp', ':rainbowmvp-annotations', ':rainbowmvp-processor'
+include ':sample', ':rainbowmvp', ':rainbowmvp-annotations', ':rainbowmvp-processor'
