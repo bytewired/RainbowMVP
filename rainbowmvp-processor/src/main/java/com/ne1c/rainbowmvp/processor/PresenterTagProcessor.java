@@ -6,6 +6,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.annotation.processing.AbstractProcessor;
+import javax.annotation.processing.Messager;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.SourceVersion;
@@ -15,22 +16,22 @@ import javax.lang.model.element.TypeElement;
 import javax.tools.Diagnostic;
 
 public class PresenterTagProcessor extends AbstractProcessor {
-    public PresenterTagProcessor() {
-    }
+    private Messager messager;
 
     @Override
     public synchronized void init(ProcessingEnvironment processingEnvironment) {
         super.init(processingEnvironment);
+
+        messager = processingEnvironment.getMessager();
     }
 
     @Override
     public boolean process(Set<? extends TypeElement> set, RoundEnvironment env) {
         for (Element e : env.getElementsAnnotatedWith(PresenterTag.class)) {
             if (e.getKind() != ElementKind.CLASS) {
-                processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR, "Can be applied only to class.");
+                messager.printMessage(Diagnostic.Kind.ERROR, "Can be applied only to class.");
                 return true;
             }
-
         }
         return false;
     }
