@@ -2,6 +2,8 @@ package com.ne1c.rainbowmvp.processor;
 
 import com.ne1c.rainbowmvp.annotaions.PresenterTag;
 import com.squareup.javapoet.JavaFile;
+import com.squareup.javapoet.MethodSpec;
+import com.squareup.javapoet.ParameterizedTypeName;
 import com.squareup.javapoet.TypeSpec;
 
 import java.io.IOException;
@@ -42,11 +44,22 @@ public class PresenterTagProcessor extends AbstractProcessor {
                 return true;
             }
 
-            TypeSpec testClass = TypeSpec.classBuilder("MyTestClass")
+            String presenterTag = e.getAnnotation(PresenterTag.class).value();
+
+            MethodSpec getPresenterTag = MethodSpec.methodBuilder("getPresenterTag")
                     .addModifiers(Modifier.PUBLIC)
+                    .addAnnotation(Override.class)
+                    .returns(String.class)
+                    .addStatement("return $S", presenterTag)
                     .build();
 
-            JavaFile testJavaFile = JavaFile.builder(e.getEnclosingElement().toString(), testClass)
+            TypeSpec inheritsClass = TypeSpec.classBuilder(e.getSimpleName().toString() + "_PresenterTag")
+                        .addModifiers(Modifier.PUBLIC)
+                        .addMethod(getPresenterTag)
+                        .superclass(ParameterizedTypeName.get(e.asType()))
+                        .build();
+
+            JavaFile testJavaFile = JavaFile.builder(e.getEnclosingElement().toString(), inheritsClass)
                     .build();
 
             try {

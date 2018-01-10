@@ -51,11 +51,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
     }
 
     @Override
-    protected String getPresenterTag() {
-        return MainPresenter.TAG;
-    }
-
-    @Override
     public void showRepos(ArrayList<RepoModel> repos) {
         mRepos.clear();
         mRepos.addAll(repos);
