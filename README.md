@@ -56,7 +56,7 @@ Create presenter. You need inherit of BasePresenter and add tag:
 
 ```java
 public class MyPresenter extends BasePresenter<MyView> {
-    public static final TAG = "my_presenter;
+    public static final TAG = "my_presenter";
     ...
     public void makeParty() {
         // some actions
