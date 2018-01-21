@@ -20,7 +20,7 @@ You can bind your view to presenter <b>ONLY</b> after <b>onStart()</b> in <b>Act
 [![](https://jitpack.io/v/ne1c/rainbowmvp.svg)](https://jitpack.io/#ne1c/rainbowmvp)
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-RainbowMVP-green.svg?style=true)](https://android-arsenal.com/details/1/4112)
 
-#Dependency
+# Dependency
 
 Step 1. Add it in your root build.gradle at the end of repositories:
 ```groovy
