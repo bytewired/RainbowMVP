@@ -35,8 +35,8 @@ allprojects {
 Step 2. Add the dependency
 ```groovy
 dependencies {
-	   implementation 'com.github.ne1c:rainbowmvp:1.2.3'
-	}
+   implementation 'com.github.ne1c:rainbowmvp:1.2.4'
+   annotationProcessor 'com.github.ne1c.rainbowmvp:processor:1.2.4'
 }
 ```
 
