@@ -34,5 +34,5 @@ dependencies {
 
     testCompile 'junit:junit:4.12'
     compile project(':rainbowmvp')
-    annotationProcessor project(':rainbowmvp-processor')
+    annotationProcessor project(':processor')
 }

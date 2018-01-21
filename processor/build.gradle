@@ -4,7 +4,7 @@ apply plugin: 'java'
 
 dependencies {
     implementation files(Jvm.current().getToolsJar())
-    implementation project(':rainbowmvp-annotations')
+    implementation project(':annotations')
     implementation 'com.squareup:javapoet:1.9.0'
 }
 
