@@ -2,6 +2,8 @@ import org.gradle.internal.jvm.Jvm
 
 apply plugin: 'java'
 
+group = 'com.github.ne1c'
+
 dependencies {
     implementation files(Jvm.current().getToolsJar())
     implementation project(':annotations')
