@@ -35,7 +35,7 @@ allprojects {
 Step 2. Add the dependency
 ```groovy
 dependencies {
-	   compile 'com.github.ne1c:rainbowmvp:1.2.2'
+	   implementation 'com.github.ne1c:rainbowmvp:1.2.3'
 	}
 }
 ```
@@ -56,7 +56,7 @@ Create presenter. You need inherit of BasePresenter and add tag:
 
 ```java
 public class MyPresenter extends BasePresenter<MyView> {
-    public static final TAG = MyPresenter.class.getName();
+    public static final TAG = "my_presenter;
     ...
     public void makeParty() {
         // some actions
@@ -104,6 +104,7 @@ public class MyApplication extends android.app.Application {
 # Step 5
 Your activity or fragment need to inherit of BaseActivity/BaseFragment and override getPresenterTag():
 ```java
+@PresenterTag(MyPresenter.TAG)
 public class MyActivity extends BaseActivity<MyPresenter> implements MyView {
     ...
     @Ovveride
@@ -118,11 +119,6 @@ public class MyActivity extends BaseActivity<MyPresenter> implements MyView {
         super.onStop();
         
         getPresenter().unbindView();
-    }
-    
-    @Override
-    public String getPresenterTag() {
-        return MyPresenter.TAG;
     }
     ...
 }
