@@ -1,5 +1,7 @@
 apply plugin: 'java'
 
+group = 'com.github.ne1c'
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
 }
