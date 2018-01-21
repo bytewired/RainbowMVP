@@ -58,5 +58,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         return mPresenter;
     }
 
-    protected abstract String getPresenterTag();
+    protected String getPresenterTag() {
+        return null;
+    }
 }

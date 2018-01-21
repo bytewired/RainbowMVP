@@ -22,7 +22,7 @@ import android.support.annotation.Nullable;
 import com.ne1c.rainbowmvp.ViewState;
 import com.ne1c.rainbowmvp.ViewStateListener;
 
-public abstract class BasePresenter<V> {
+public abstract class BasePresenter<V extends BaseView> {
     private V mView;
 
     private ViewState mLastState = ViewState.NOTHING;

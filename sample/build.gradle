@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "24.0.1"
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.ne1c.rainbowmvpexample"
         minSdkVersion 9
@@ -34,4 +34,5 @@ dependencies {
 
     testCompile 'junit:junit:4.12'
     compile project(':rainbowmvp')
+    annotationProcessor project(':rainbowmvp-processor')
 }

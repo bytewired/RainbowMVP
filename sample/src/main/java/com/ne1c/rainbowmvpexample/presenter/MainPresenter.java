@@ -19,7 +19,7 @@ import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 public class MainPresenter extends BasePresenter<MainView> implements ViewStateListener {
-    public static final String TAG = MainPresenter.class.getName();
+    public static final String TAG = "main_presenter";
 
     private ReposApi mApi;
 
@@ -63,7 +63,7 @@ public class MainPresenter extends BasePresenter<MainView> implements ViewStateL
                 .subscribe(new Action1<ArrayList<RepoModel>>() {
                     @Override
                     public void call(ArrayList<RepoModel> repoModels) {
-                        setViewState(ViewState.FINISH, false);
+                        setViewState(ViewState.FINISH);
 
                         if (getView() != null) {
                             getView().showRepos(repoModels);
@@ -74,7 +74,7 @@ public class MainPresenter extends BasePresenter<MainView> implements ViewStateL
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-                        setViewState(ViewState.ERROR, false);
+                        setViewState(ViewState.ERROR);
 
                         if (getView() != null) {
                             getView().showError(R.string.something_happened);
