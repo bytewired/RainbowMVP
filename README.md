@@ -1,3 +1,6 @@
+# Deprecated
+Deprecated! Use [Architecture Components](https://developer.android.com/topic/libraries/architecture/)
+
 # RainbowMVP
 Lightweight MVP library(for personal using) with easy lifecycle.
 
